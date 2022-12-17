@@ -3,6 +3,20 @@ const express = require("express");
 const Schema = mongoose.Schema;
 const app = express();
 const jsonParser = express.json();
+
+const {
+    MONGO_DB_HOSTNAME,
+    MONGO_DB_PORT,
+    MONGO_DB
+} = process.env
+
+const options = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useFindAndModify: false
+}
+
+const url = `mongodb://${MONGO_DB_HOSTNAME}:${MONGO_DB_PORT}/${MONGO_DB}`;
  
 const trackScheme = new Schema({name: String, 
     author: String, genre: String, date: Number}, 
@@ -12,13 +26,10 @@ const Track = mongoose.model("Track", trackScheme);
 app.use(express.static(__dirname + "/public"));
  
 // підключення до бази даних
-mongoose.connect("mongodb://localhost:27017/songsdb", 
-    { useUnifiedTopology: true, useNewUrlParser: true}, 
-    function(err){
-    if (err) 
-        return console.log(err);
+mongoose.connect(url, options, function(err){
+    if(err) return console.log(err);
     app.listen(3000, function(){
-        console.log("Сервер очікує на підключення...");
+        console.log("Сервер очікує підключення...");
     });
 });
 
