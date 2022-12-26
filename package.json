@@ -1,9 +1,9 @@
 {
   "name": "mongoapp",
   "version": "1.0.0",
-  "description": "JavaScript Lab4 Mongoose",
+  "description": "JavaScript Lab5 Docker",
   "main": "index.js",
-  "author": "Dmytro Pomyluiko KI-191",
+  "author": "Dmytro Hordienko KI-191",
   "license": "ISC",
     "dependencies": {
       "dotenv": "^8.2.0",
